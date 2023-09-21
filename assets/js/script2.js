@@ -159,7 +159,6 @@ while (repetir) {
         case '8':
             //calculadora de potencia
             var base = parseFloat(prompt("Ingrese el número base:"));
-
             if (!isNaN(base)) {
                 var exponente = parseInt(prompt("Ingrese el exponente:"));
                 if (!isNaN(exponente)) {
@@ -172,7 +171,6 @@ while (repetir) {
             } else {
                 console.log("Por favor, ingrese un número base válido.");
             }
-
             break;
         case '9':
             //salir del programa
@@ -183,27 +181,17 @@ while (repetir) {
             console.log('Opción no válida. Por favor, selecciona una opción válida.');
     }
 }
-
-let conteoMinimo = Infinity; // Inicializar con un valor grande para encontrar el mínimo
+let opcionMasUsada = '1';
+let opcionMenosUsada = '1';
 for (const key in conteoMenu) {
-  if (conteoMenu.hasOwnProperty(key) && conteoMenu[key] < conteoMinimo) {
-    conteoMinimo = conteoMenu[key];
+  if (conteoMenu.hasOwnProperty(key)) {
+    if (conteoMenu[key] > conteoMenu[opcionMasUsada]) {
+      opcionMasUsada = key;
+    }
+    if (conteoMenu[key] < conteoMenu[opcionMenosUsada]) {
+      opcionMenosUsada = key;
+    }
   }
 }
-
-// Encontrar todas las opciones menos usadas
-const opcionesMenosUsadas = [];
-for (const key in conteoMenu) {
-  if (conteoMenu.hasOwnProperty(key) && conteoMenu[key] === conteoMinimo) {
-    opcionesMenosUsadas.push(key);
-  }
-}
-
-if (opcionesMenosUsadas.length > 0) {
-  console.log(`Las opciones menos utilizadas (${conteoMinimo} veces) fueron:`);
-  for (const opcion of opcionesMenosUsadas) {
-    console.log(`Opción ${opcion}`);
-  }
-} else {
-  console.log(`Todas las opciones se utilizaron igual número de veces.`);
-}
+console.log(`La opción más utilizada fue la ${opcionMasUsada} (${conteoMenu[opcionMasUsada]} veces).`);
+console.log(`La opción menos utilizada fue la ${opcionMenosUsada} (${conteoMenu[opcionMenosUsada]} veces).`);
